@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/demo")
-public class DemoController {
+@RequestMapping("/greetings")
+public class GreetingsController {
 
     @GetMapping
     public ResponseEntity<String> greetings(){
-        return ResponseEntity.ok("Welcome to tea code development");
+        return ResponseEntity.ok("Welcome to Tea-code development");
     }
 }
