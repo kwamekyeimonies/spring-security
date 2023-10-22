@@ -1,10 +1,18 @@
 package com.teacodesecurity.teacodesecurity.service;
 
-import com.teacodesecurity.teacodesecurity.entity.User;
-import com.teacodesecurity.teacodesecurity.model.UserModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-public interface UserService {
-    User registerUser(UserModel userModel);
+public class UserService implements UserDetailsService {
 
-    void saveUserVerificationToken(String token, User user);
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        
+        return null;
+    }
 }

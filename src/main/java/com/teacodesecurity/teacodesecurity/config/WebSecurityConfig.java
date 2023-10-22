@@ -5,23 +5,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.DefaultSecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class WebSecurityConfig {
-
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) {
+    DefaultSecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws  Exception {
         return httpSecurity
-                .authorizeHttpRequests()
-                .anyRequest()
-                .authenticated();
-        httpSecurity.formLogin();
-        httpSecurity.httpBasic();
+                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
+                .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
+                        .anyRequest().permitAll())
+                .build();
 
-        return httpSecurity.build();
     }
 }
