@@ -1,4 +1,4 @@
-package org.kwamekyeimonies;
+package org.springsecurity;
 
 public class Main {
     public static void main(String[] args) {
