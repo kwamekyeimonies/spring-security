@@ -1,6 +1,7 @@
 package com.teacodesecurity.teacodesecurity.controller;
 
 
+import com.teacodesecurity.teacodesecurity.entity.LoginResponseDto;
 import com.teacodesecurity.teacodesecurity.entity.RegistrationDto;
 import com.teacodesecurity.teacodesecurity.model.UserModel;
 import com.teacodesecurity.teacodesecurity.service.AuthenticationService;
@@ -18,6 +19,11 @@ public class AuthenticationController {
     @PostMapping("/register")
     public UserModel registerUser(@RequestBody RegistrationDto registrationDto){
         return authenticationService.registerUser(registrationDto.getUsername(),registrationDto.getFullName(),registrationDto.getEmail(),registrationDto.getPassword());
+    }
+
+    @PostMapping("/login")
+    public LoginResponseDto loginUser(@RequestBody RegistrationDto body){
+        return authenticationService.loginUser(body.getUsername(), body.getPassword());
     }
 
 }
