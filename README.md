@@ -1,4 +1,4 @@
-# spring-security-keycloak
+# spring-security
 SPRINGBOOT SECURITY 
 -   JWT Authentication
 -   Role-Based Authorization
