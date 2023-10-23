@@ -1,2 +1,6 @@
 # spring-security-keycloak
-SPRINGBOOT SECURITY WITH KEYCLOAK SERVER
+SPRINGBOOT SECURITY 
+-   JWT Authentication
+-   Role-Based Authorization
+- Key-Cloak Integration
+- OAUTH2/OpenId Connect
