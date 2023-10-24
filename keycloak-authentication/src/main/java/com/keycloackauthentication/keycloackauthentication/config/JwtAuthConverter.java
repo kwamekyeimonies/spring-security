@@ -1,6 +1,5 @@
 package com.keycloackauthentication.keycloackauthentication.config;
 
-import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.convert.converter.Converter;
@@ -20,18 +19,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
-@AllArgsConstructor
 public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationToken> {
 
     private final JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter =
             new JwtGrantedAuthoritiesConverter();
 
-    @Value("${jwt.auth.converter.principal-attribute}")
-    private final String principalAttribute;
+//    @Value("${jwt.auth.converter.principle-attribute}")
+    private String principleAttribute="preferred_username";
 
-    @Value("${jwt.auth.converter.resource-id}")
-    private final String resourceId;
-
+//    @Value("${jwt.auth.converter.resource-id}")
+    private String resourceId="kwame-rest-api";
 
     @Override
     public AbstractAuthenticationToken convert(@NonNull Jwt jwtsource){
@@ -50,8 +47,8 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
     private String getPrincipleClaimName(Jwt jwtsource) {
         String claimName = JwtClaimNames.SUB;
 
-        if(principalAttribute != null){
-            claimName = principalAttribute;
+        if(principleAttribute != null){
+            claimName = principleAttribute;
         }
 
         return jwtsource.getClaim(claimName);

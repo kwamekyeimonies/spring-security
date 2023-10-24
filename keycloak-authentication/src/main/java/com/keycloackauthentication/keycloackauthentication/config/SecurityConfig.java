@@ -1,6 +1,7 @@
 package com.keycloackauthentication.keycloackauthentication.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,25 +16,27 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    @Autowired
     private final JwtAuthConverter jwtAuthConverter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity
-                .csrf()
-                .disable()
-                .authorizeHttpRequests()
-                        .anyRequest()
-                                .authenticated();
+                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
+                .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
+                        .anyRequest().authenticated());
 
         httpSecurity
-                .oauth2ResourceServer()
-                        .jwt()
-                                .jwtAuthenticationConverter(jwtAuthConverter);
+                .oauth2ResourceServer(httpSecurityOAuth2ResourceServerConfigurer -> httpSecurityOAuth2ResourceServerConfigurer.jwt(
+                        jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthConverter)
+                ));
+
 
         httpSecurity
-                .sessionManagement()
-                .sessionCreationPolicy(STATELESS);
+                .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(
+                        SessionCreationPolicy.STATELESS
+                ));
+
 
         return httpSecurity.build();
     }

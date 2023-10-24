@@ -8,7 +8,7 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8074/realms/DanielTenkorang
-          jwk-set-uri: ${spring.security.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
   datasource:
     password: admin123
     url: jdbc:postgresql://localhost:5433/keycloaksecdb
@@ -24,4 +24,4 @@ spring:
     auth:
       converter:
         resource-id: kwame-rest-api
-        principal-attribute: preferred_username
+        principle-attribute: preferred_username
