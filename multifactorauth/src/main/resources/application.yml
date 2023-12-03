@@ -1,6 +1,6 @@
-pring:
+spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/jwt_security
+    url: jdbc:postgresql://localhost:5433/jwt_security
     username: admin
     password: admin123
     driver-class-name: org.postgresql.Driver
@@ -21,3 +21,6 @@ application:
       expiration: 86400000 # a day
       refresh-token:
         expiration: 604800000 # 7 days
+server:
+  port:
+    9044
