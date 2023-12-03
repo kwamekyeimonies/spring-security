@@ -11,6 +11,7 @@
     <modules>
         <module>keycloak-authentication</module>
         <module>openId-connect-authentication</module>
+        <module>multifactorauth</module>
     </modules>
 
     <properties>
