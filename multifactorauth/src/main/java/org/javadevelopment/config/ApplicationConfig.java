@@ -19,13 +19,10 @@ import static org.springframework.http.HttpHeaders.ACCEPT;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.HttpHeaders.ORIGIN;
-import static org.springframework.http.HttpMethod.DELETE;
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.http.HttpMethod.PUT;
+import static org.springframework.http.HttpMethod.*;
 
 import java.util.Arrays;
-import java.util.Collections;
+
 
 @Configuration
 @RequiredArgsConstructor
@@ -62,7 +59,7 @@ public class ApplicationConfig {
         final UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
         corsConfiguration.setAllowedHeaders(Arrays.asList(
                 ORIGIN,
                 CONTENT_TYPE,
@@ -70,8 +67,19 @@ public class ApplicationConfig {
                 AUTHORIZATION
 
         ));
+        corsConfiguration.setAllowedMethods(Arrays.asList(
+                GET.name(),
+                POST.name(),
+                DELETE.name(),
+                PUT.name(),
+                PATCH.name()
+        ));
 
         urlBasedCorsConfigurationSource.registerCorsConfiguration("/**",corsConfiguration);
         return new CorsFilter(urlBasedCorsConfigurationSource);
     }
+
+
+
+
 }
